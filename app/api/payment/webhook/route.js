@@ -11,7 +11,7 @@ export async function POST(req){
     let data;
     let eventType;
     // Check if webhook signing is configured.
-    const webhookSecret = '{{STRIPE_WEBHOOK_SECRET}}';
+    const webhookSecret = process.env.STRIPE_WEBHOOK_KEY;
     if (webhookSecret) {
       // Retrieve the event by verifying the signature using the raw body and secret.
       let event;

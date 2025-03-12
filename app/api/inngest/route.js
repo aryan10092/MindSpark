@@ -10,7 +10,7 @@ export const runtime='edge'
 export const { GET, POST, PUT } = serve({
   
   client: inngest,
-  streaming;'allow',
+  streaming:'allow',
   functions: [
     helloWorld,
     createuser,

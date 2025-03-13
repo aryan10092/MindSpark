@@ -16,5 +16,5 @@ export async function POST(req,res){
     const notes =await db.select().from(STUDY_TABLE)
     .where(eq(STUDY_TABLE?.createdby,createdemail))
   
-    return NextResponse.json({count:notes})
+    return NextResponse.json({count:notes.length})
 }

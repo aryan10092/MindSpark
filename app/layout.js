@@ -5,7 +5,7 @@ import { Outfit} from 'next/font/google'
 import Provider from "./provider";
 import { Toaster } from "@/components/ui/sonner";
 import { ToastContainer } from "react-toastify";
-// import { Toaster } from "sonner";
+
 
 const outfit=Outfit({subsets:['latin']})
 

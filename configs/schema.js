@@ -6,7 +6,7 @@ import { serial, boolean, varchar, pgTable, json, integer, text } from "drizzle-
 
  const USER_TABLE=pgTable('users',{
     id:serial().primaryKey(),
-    name:varchar().notNull(),
+    name:varchar(),
     email:varchar().notNull(),
     isMember:boolean().default(false),
     customerId:varchar()

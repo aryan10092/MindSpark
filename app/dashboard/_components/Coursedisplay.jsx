@@ -6,34 +6,13 @@ import React, { useContext, useEffect, useState } from 'react'
 import Banner from './Banner'
 import { Button } from '@/components/ui/button'
 import { toast } from 'react-toastify'
+
 import { Creditcount } from '@/app/_context/Creditcount'
 import db from '@/configs/db'
 import USER_TABLE from '@/configs/schema'
 import { eq } from 'drizzle-orm'
 
-// function Coursedisplay() {
-        
-//     const {user}=useUser()
-//     const[courselist,setcourselist]=useState([])
-//     const{totalcredits,setcredits}=useContext(Creditcount)
 
-//     useEffect(()=>{
-
-//    user&&getcourselist()
-
-//     },[user])
-   
-//     const getcourselist=async()=>{
-
-//         const result=await axios.post('/api/course',
-//       {createdemail:user?.primaryEmailAddress?.emailAddress}
-//         )
-//         console.log(result)
-//         setcourselist(result.data.result)
-//         console.log(courselist)
-
-//         setcredits(result.data.result?.length)
-//     }
 
 function Coursedisplay() {
         

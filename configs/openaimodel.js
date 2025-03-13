@@ -83,7 +83,7 @@ export async function generateStudyMaterial(topic, studytype, level) {
     messages: [{ role: "user", content: [{ type: "text", text: PROMPT }] }],
     response_format: { type: "json_object" },
     temperature: 1,
-    max_tokens: 661,
+    max_tokens: 1561,
     top_p: 1,
     frequency_penalty: 0,
     presence_penalty: 0
@@ -127,7 +127,7 @@ export async function generatenotesai(PROMPT) {
         type: "text", 
       },
       temperature: 1,
-      max_completion_tokens: 682,
+      max_completion_tokens: 1682,
       top_p: 1,
       frequency_penalty: 0,
       presence_penalty: 0,

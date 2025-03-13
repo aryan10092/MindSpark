@@ -1,72 +1,3 @@
-// "use client"
-// import React, { useState } from 'react'
-// import Courseoptions from'./_components/Courseoptions'
-// import { Button, buttonVariants } from '@/components/ui/button'
-// import Topic from'./_components/Topic'
-// import axios from 'axios'
-// import {v4 as uuidv4} from 'uuid'
-// import { useUser } from '@clerk/nextjs'
-// import { Loader } from 'lucide-react'
-// import { useRouter } from 'next/navigation'
-
-
-// function Create() {
-//   const [step,usestep]=useState(0)
-//   const {user}=useUser()
-// const[formdata,setformdata]=useState([])
-// const [loading ,setloading]=useState(false)
-
-// const router =useRouter()
-
-//   const handleinputoptions=(name,value)=>{
-//     setformdata(prev=>({
-//       ...prev,
-//       [name]:value
-//     }))
-//     console.log(formdata)
-//   }
-//   console.log(formdata)
-
-//   const  generatecourse=async()=>{
-// const courseid=uuidv4()
-// setloading(true)
-//     const result=await axios.post('/api/generatecourse/',{
-// courseId:courseid,
-// ...formdata,
-// createdBy:user?.primaryEmailAddress?.emailAddress
-
-//     })
-//     setloading(false)
-//     router.replace('/dashboard')
-// console.log(result)
-//   }
-
-//   return (
-   
-//     <div className='flex flex-col items-center p-5 md:px-24 lg:px-36 mt-20'>
-//         <h2 className='font-bold text-4xl text-primary'>
-//             Start Generating your personal study material</h2>
-//     <p className='text-gray-500 text-lg'>  
-//         fill all details to generate yur study material</p>
-
-//         <div className='mt-10 '>
-//         { step==0? < Courseoptions selectedtype={(value)=>handleinputoptions('studytype',value)}/>
-//         :<Topic Settopic={(value)=>handleinputoptions('topic',value)}
-//         setlevel={(value)=>handleinputoptions('level',value)}/>
-//       }
-//         </div>
-//         <div className='flex justify-between w-full mt-28'>
-//                    { step!=0?<Button variant="outline"onClick={()=>usestep(0)}>Previous</Button>:'.'}
-
-//                    { step==0? <Button onClick={()=>usestep(1)}>Next</Button>:<Button onClick={generatecourse} disabled={loading}>
-                    
-//                     {loading?<Loader className='animate-spin'/>:'Generate'}</Button>}
-//                 </div>
-//     </div>
-//   )
-// }
-
-// export default Create
 
 
 "use client"
@@ -92,7 +23,8 @@ function Create() {
   const { user } = useUser()
 
   const [formData, setFormData] = useState({})
-  const [loading, setLoading] = useState(false)
+   
+     const [loading, setLoading] = useState(false)
   const router = useRouter()
 
   const [userDetails, setUserDetails] = useState(null)
@@ -130,15 +62,17 @@ function Create() {
       })
       console.log(response)
       console.log(response.data.count)
-      setUserCoursesCount(response.data.count)
+       
+        setUserCoursesCount(response.data.count)
     } catch (error) {
+       
       console.error('Failed to fetch user courses count:', error)
     }
   }
 
 
     const handleInputOptions = (name, value) => {
-    setFormData(prev => ({
+     setFormData(prev => ({
       ...prev,
       [name]: value|| ""
     }))
@@ -146,9 +80,7 @@ function Create() {
   }
   console.log(formData)
 
-if(userDetails?.isMember||userCoursesCount < 5){
-  const notify = () => toast("Your course is generating, Please wait");
-}
+
   // console.log(formData.studytype)
 
   const generateCourse = async () => {
@@ -164,11 +96,11 @@ if(userDetails?.isMember||userCoursesCount < 5){
         createdBy: user?.primaryEmailAddress?.emailAddress
       })
 
-
+  toast("Your course is generating, Please wait")
       router.replace('/dashboard')
       setTimeout(() => {
         toast.success("Please refresh this page to start your journey");
-      }, 9000);
+      }, 30000);
       console.log(result)
 
     } catch (error) {
@@ -288,7 +220,7 @@ if(userDetails?.isMember||userCoursesCount < 5){
             </Button>
           ) : (
             <Button
-              onClick={()=>{generateCourse(); notify()}}  disabled={loading||!formData.topic}
+              onClick={()=>{generateCourse()}}  disabled={loading||!formData.topic}
 
               className="bg-gradient-to-r from-orange-500 to-pink-500 hover:opacity-90 
                 disabled:opacity-50 disabled:cursor-not-allowed"

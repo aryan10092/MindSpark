@@ -105,7 +105,7 @@ return (
             <div className='bg-slate-800 rounded-xl p-5 border border-slate-700'>
 
 
-            {totalcredits<5?(<>
+            {totalcredits<=5?(<>
 
     <div className='flex items-center gap-4 mb-4'>
 

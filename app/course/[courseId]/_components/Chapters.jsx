@@ -108,7 +108,7 @@ function Chapters({course}) {
                <h2 className='font-medium text-slate-200 group-hover:text-orange-400 
                      transition-colors duration-300' >
                    
-                   {x?.chapter_title||x?.chapterTitle}
+                   {x?.chapter_title||x?.chapterTitle||x?.title}
                </h2>
                  
                <button   onClick={(e) => toggleComplete(e, i)}

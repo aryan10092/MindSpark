@@ -100,7 +100,7 @@ function Create() {
       router.replace('/dashboard')
       setTimeout(() => {
         toast.success("Please refresh this page to start your journey");
-      }, 30000);
+      }, 20000);
       console.log(result)
 
     } catch (error) {

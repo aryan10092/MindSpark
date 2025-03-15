@@ -4,7 +4,9 @@
 import { Button } from '@/components/ui/button'
 import axios from 'axios'
 import { Target } from 'lucide-react'
-
+import db from '@/configs/db'
+import { CHAPTER_NOTES } from '@/configs/schema'
+import { and, eq } from 'drizzle-orm'
 import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
 
@@ -24,13 +26,37 @@ function Chapters({course}) {
         setExpandedIndex(expandedIndex === index ? null : index)
     }
 
-    const toggleComplete = (e, index) => {
+    const toggleComplete = async(e, index) => {
         e.stopPropagation() 
-        setCompletedChapters(prev => ({
-            ...prev,
-            [index]: !prev[index]
-        }))
-    }
+
+        const chapterNote = notes[index];
+        if (!chapterNote) return;
+    
+        const { chapterId, courseId, complete } = chapterNote;
+    
+        try {
+           
+            const newCompletionStatus = !complete;
+    
+            await db.update(CHAPTER_NOTES)
+            .set({ complete: newCompletionStatus })
+            .where(and(eq(CHAPTER_NOTES.chapterId, chapterId), eq(CHAPTER_NOTES.courseId, courseId)));
+
+            setCompletedChapters(prev => ({
+                ...prev,
+                [index]: newCompletionStatus
+            }));
+    
+     
+            setnotes(prevNotes => {
+                const updatedNotes = [...prevNotes];
+                updatedNotes[index] = { ...updatedNotes[index], complete: newCompletionStatus };
+                return updatedNotes;
+            });
+        } catch (error) {
+            console.error("Error updating completion status:", error);
+        }
+    };
     
     useEffect(() => 
         {  getnotes();
@@ -42,13 +68,26 @@ function Chapters({course}) {
     }, [notes]); 
 
     
-    const getnotes=async()=>{
-        const res=await axios.post('/api/notes',{
-            courseid:courseId
-        })
-        const sortedNotes = res?.data?.sort((a, b) => a.chapterId - b.chapterId)
+   const getnotes=async()=>{
+        try {
+            const res = await axios.post('/api/notes', {
+                courseid: courseId 
+            });
+    
+            const sortedNotes = res?.data?.sort((a, b) => a.chapterId - b.chapterId);
+    
+            setnotes(sortedNotes);
+    
         console.log(sortedNotes)
-        setnotes(sortedNotes)
+            const completedState = {};
+            sortedNotes.forEach((note, index) => {
+                completedState[index] = note.complete; 
+            });
+    
+            setCompletedChapters(completedState);
+        } catch (error) {
+            console.error("Error fetching notes:", error);
+        }
     }
 
     return (

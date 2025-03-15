@@ -32,7 +32,8 @@ export const CHAPTER_NOTES=pgTable('chapternotes',{
 
     courseId:varchar().notNull(),
     chapterId:integer().notNull(),
-    notes:text()
+    notes:text(),
+ complete:boolean().default(false)
 }
 )
 

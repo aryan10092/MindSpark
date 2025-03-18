@@ -2,10 +2,10 @@
 
 import { UserButton } from '@clerk/nextjs';
 import { usePathname } from 'next/navigation';
-
+import { Menu } from 'lucide-react';
 import { FaBook, FaFire } from 'react-icons/fa'; 
 
-function DashHeader() {
+function DashHeader({ isOpen, setIsOpen }) {
 
   const pathname = usePathname();
 
@@ -17,7 +17,15 @@ function DashHeader() {
        
         <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-orange-400 to-pink-400 flex
           items-center justify-center">
-          <FaFire className="w-8 h-8 text-white" />
+        <button 
+            onClick={() => setIsOpen(!isOpen)}
+            className="lg:hidden"
+          >
+            <Menu className="w-8 h-8 text-white" />
+          </button>
+          <FaFire className="hidden lg:block w-8 h-8 text-white" />
+
+          
         </div>
 
         

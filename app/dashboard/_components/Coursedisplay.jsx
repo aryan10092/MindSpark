@@ -41,7 +41,7 @@ function Coursedisplay() {
   const {user}=useUser()
   const[courselist,setcourselist]=useState([])
   const{totalcredits,setcredits}=useContext(Creditcount)
-  const{loading,setloading}=useState(false)
+  const[loading,setloading]=useState(false)
   const [userDetails, setUserDetails] = useState(null)
 
   useEffect(() => {
@@ -70,9 +70,9 @@ if (user && userDetails) {
 
  
   const getcourselist=async()=>{
-
+      setloading(true)
 try{
-  setloading(true)
+  
       const result=await axios.post('/api/course',
     {createdemail:user?.primaryEmailAddress?.emailAddress}
       )

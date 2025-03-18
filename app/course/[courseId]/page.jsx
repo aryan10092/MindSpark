@@ -52,7 +52,7 @@ function page() {
 
   return (
     <div>
-        <Dashheader/>
+     
 
         <div className='mx-10 md:mx-36 lg:mx-60 mt-10'> 
           <Introcard course={course}/>

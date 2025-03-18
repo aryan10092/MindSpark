@@ -64,7 +64,21 @@ export const generatenotes = inngest.createFunction(
       await Promise.all(
         chapters.map(async (chapter, index) => {
           try {
-            const PROMPT = `generate exam material detail content for each chapter, make sure to include all topic points in the content, make sure to give content in HTML format (do not add HTML, head, body, title tags), the chapters: ${JSON.stringify(chapter)}`;
+           // const PROMPT = `generate exam material detail content for each chapter, make sure to include all topic points in the content, make sure to give content in HTML format (do not add HTML, head, body, title tags), the chapters: ${JSON.stringify(chapter)}`;
+            const PROMPT= `
+            Generate detailed exam material for each chapter listed below. Ensure the content includes all topic points with clear explanations.  
+            Provide the content in properly formatted HTML using:
+            - <h2> for chapter titles
+            - <h3> for topic titles
+            - <p> for explanations
+            - <ul> or <ol> for listing key points
+           
+            
+            Do not include <html>, <head>, <body>, or <title> tags.style the text properly
+            Use the following chapters: ${JSON.stringify(chapter)}
+            `
+
+            
             const res = await generatenotesai(PROMPT);
             const airesp = await res.response.text();
             console.log(airesp);

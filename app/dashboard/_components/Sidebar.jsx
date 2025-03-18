@@ -12,7 +12,7 @@ import { usePathname } from 'next/navigation'
 import React, { useContext } from 'react'
 import { FaBook } from 'react-icons/fa'
 
-function Sidebar() {
+function Sidebar({isopen, setIsOpen}) {
 const menuItems = [{
     
         name: 'Learning Path',
@@ -57,6 +57,16 @@ return (
 
                 <h2 className='font-bold text-2xl bg-gradient-to-r from-orange-400
                  to-pink-400 bg-clip-text text-transparent'>MindSpark</h2>
+
+                  <button 
+            onClick={() => setIsOpen(false)}
+            className='lg:hidden text-slate-400 hover:text-white'
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+       
             </div>
 
             <div  

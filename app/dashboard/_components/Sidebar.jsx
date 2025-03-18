@@ -42,23 +42,19 @@ const path = usePathname()
 
 
 return (
-    <div className='h-screen bg-slate-900 w-72 fixed left-0 top-0 text-white'>
+    <div className='h-screen bg-slate-900 w-72 text-white overflow-y-auto'>
+      <div className='p-6'>
 
-  <div className='p-6'>
-    
-     <div className='flex items-center gap-3'>
-                <div
-                 className='w-12 h-12 rounded-xl bg-gradient-to-br from-orange-500
-                  to-pink-500 flex items-center justify-center'>
-
-                    <FaBook className='w-8 h-8' />
+ <div className='flex items-center justify-between'>
+          <div className='flex items-center gap-3'>
+            <div className='w-12 h-12 rounded-xl bg-gradient-to-br from-orange-500 to-pink-500 flex
+             items-center justify-center'>
+              <FaBook className='w-8 h-8' />
+            </div>
+            <h2 className='font-bold text-2xl bg-gradient-to-r from-orange-400 to-pink-400 bg-clip-text text-transparent'>MindSpark</h2>
           </div>
-
-
-                <h2 className='font-bold text-2xl bg-gradient-to-r from-orange-400
-                 to-pink-400 bg-clip-text text-transparent'>MindSpark</h2>
-
-                  <button 
+          {/* Close button for mobile */}
+          <button 
             onClick={() => setIsOpen(false)}
             className='lg:hidden text-slate-400 hover:text-white'
           >
@@ -66,61 +62,59 @@ return (
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
             </svg>
           </button>
-       
-            </div>
-
-            <div  
-             className='mt-10 space-y-8'>
-                <Link href={'/create'}>
-                <Button className='w-full bg-gradient-to-r from-orange-500 to-pink-500
-                 hover:from-orange-600 hover:to-pink-600 text-white font-semibold rounded-xl 
-                 h-12 text-lg shadow-lg shadow-orange-500/20 mb-4'>
-                    Start Learning
-
-
-                </Button></Link>
-
-                <nav className='space-y-2'>
-                    {menuItems.map((item, index) => (
-
-            <Link href={item.path} key={index}>
-                 <div className={`flex items-center mt-3 justify-between px-4 py-3.5 rounded-xl
-                  transition-all duration-300 
-                                ${path === item.path 
-                                    ? 'bg-gradient-to-r from-orange-500/20 to-pink-500/20 border border-orange-500/20' 
-                                    : 'hover:bg-slate-800' }`}>
-                                <div className='flex items-center gap-3'>
-
-                <item.icon className={`w-5 h-5 ${path === item.path ? 'text-orange-400' : 'text-slate-400'}`}/>
-                                    <span className={`font-medium ${path === item.path ? 'text-orange-400' : 'text-slate-300'}`}>
-                                        {item.name}
-                                    </span>
-                                </div>
-                                {item.badge && (
-                                    <span className='text-xs bg-orange-500/20 text-orange-400 px-2 py-1 rounded-full'>
-                                        {item.badge}
-                                    </span>
-                                )}
-                            </div>
-                        </Link>
-                    ))}
-          </nav>
-
-            </div>
         </div>
 
-        
-        <div className='absolute bottom-6 left-6 right-6'>
+        <div className='mt-10 space-y-8'>
+            <Link href={'/create'}>
+            <Button className='w-full bg-gradient-to-r from-orange-500 to-pink-500
+             hover:from-orange-600 hover:to-pink-600 text-white font-semibold rounded-xl 
+             h-12 text-lg shadow-lg shadow-orange-500/20 mb-4'>
+                Start Learning
 
-            <div className='bg-slate-800 rounded-xl p-5 border border-slate-700'>
+
+            </Button></Link>
+
+            <nav className='space-y-2'>
+                {menuItems.map((item, index) => (
+
+        <Link href={item.path} key={index}>
+             <div className={`flex items-center mt-3 justify-between px-4 py-3.5 rounded-xl
+              transition-all duration-300 
+                            ${path === item.path 
+                                ? 'bg-gradient-to-r from-orange-500/20 to-pink-500/20 border border-orange-500/20' 
+                                : 'hover:bg-slate-800' }`}>
+                            <div className='flex items-center gap-3'>
+
+                <item.icon className={`w-5 h-5 ${path === item.path ? 'text-orange-400' : 'text-slate-400'}`}/>
+                                <span className={`font-medium ${path === item.path ? 'text-orange-400' : 'text-slate-300'}`}>
+                                    {item.name}
+                                </span>
+                            </div>
+                            {item.badge && (
+                                <span className='text-xs bg-orange-500/20 text-orange-400 px-2 py-1 rounded-full'>
+                                    {item.badge}
+                                </span>
+                            )}
+                        </div>
+                    </Link>
+                ))}
+      </nav>
+
+        </div>
+    </div>
+
+    
+    <div className='absolute bottom-6 left-6 right-6'>
+
+        <div className='bg-slate-800 rounded-xl p-5 border border-slate-700'>
 
 
-            {totalcredits<=5?(<>
+        {totalcredits<=5?(<>
 
-    <div className='flex items-center gap-4 mb-4'>
+<div className='flex items-center gap-4 mb-4'>
 
-                      
-           
+                  
+               
                     <div className='w-12 h-12 rounded-xl bg-gradient-to-br from-orange-500/20 to-pink-500/20 
                     flex items-center justify-center'>
                         <Rocket className='w-6 h-6 text-orange-400' />
@@ -171,11 +165,13 @@ return (
                       }
 
 
-            </div>
-
         </div>
+
     </div>
+</div>
 )
 }
+
+export default Sidebar
 
 export default Sidebar

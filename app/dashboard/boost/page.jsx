@@ -102,7 +102,7 @@ function boost() {
                 
                 <h3 className="text-2xl font-bold mb-2">Premium Plan</h3>
                 <div className="text-3xl font-bold mb-4">
-                    $1 <span className="text-gray-400 text-lg">/month
+                    $9.99 <span className="text-gray-400 text-lg">/month
                     </span>
                     
                 </div>

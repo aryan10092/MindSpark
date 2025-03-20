@@ -44,3 +44,11 @@ export const PAYMENT_RECORD=pgTable('paymentrecords',{
     sessionId:varchar()
 
 })
+export const COOMENTS=pgTable('comments',{
+    id:serial().primaryKey(),
+    name:text(),
+    userId:varchar().notNull(),
+    cooment:text(),
+    timestamp:timestamp("date").defaultNow()
+
+})

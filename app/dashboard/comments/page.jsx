@@ -52,7 +52,7 @@ function Comments() {
           comments.map((comment) => (
             <li key={comment.id} className="border-b py-2">
               
-              <strong>{comment.name}</strong>: {comment.cooment}
+              <strong>{comment.name||"Guest"}</strong>: {comment.cooment}
             </li>
           ))
         ) :

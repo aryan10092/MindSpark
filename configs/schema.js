@@ -1,7 +1,7 @@
 
 
 
-import { serial, boolean, varchar, pgTable, json, integer, text } from "drizzle-orm/pg-core";
+import { serial, boolean, varchar, pgTable, json, integer, text, timestamp } from "drizzle-orm/pg-core";
 
 
  const USER_TABLE=pgTable('users',{
@@ -23,7 +23,8 @@ export const STUDY_TABLE=pgTable('studymaterial',{
     level:varchar().default('Easy'),
     courselayout:json(),
     createdby:varchar().notNull(),
-    status:varchar().default('Generating')
+    status:varchar().default('Generating'),
+ date:timestamp("date").defaultNow()
 
 })
 

@@ -27,7 +27,13 @@ function Coursecard({course}) {
        <div className='px-3 py-1.5 sm:px-4 sm:py-2 rounded-xl text-xs sm:text-sm bg-gradient-to-r from-orange-500 to-pink-400 
             text-white border border-orange-300 group-hover:from-orange-500 
             group-hover:to-pink-500 transition-all duration-300'>
-               {course?.date || '27 February'}
+                 { course?.date
+    ? new Date(course.date).toLocaleDateString("en-GB", {
+        day: "2-digit",
+        month: "long",
+        year: "numeric",
+      })
+    : "Not available"}
           </div>
 
         </div>

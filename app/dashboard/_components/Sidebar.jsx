@@ -4,7 +4,7 @@ import { Creditcount } from '@/app/_context/Creditcount'
 import { Button } from '@/components/ui/button'
 import { Progress } from '@/components/ui/progress'
 
-  import { Flame, Rocket, BookOpen, UserCircle, Settings } from 'lucide-react'
+  import { Flame, Rocket, BookOpen, UserCircle, MessageCircleHeart } from 'lucide-react'
   import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
@@ -29,11 +29,11 @@ const menuItems = [{
         icon: UserCircle,
         path: '/dashboard/profile'
     },
-    // {
-    //     name: 'Settings',
-    //     icon: Settings,
-    //     path: '/settings'
-    // }
+     {
+          name: 'Comments',
+        icon: MessageCircleHeart,
+        path: '/dashboard/comments'
+     }
 ]
 
 const path = usePathname()

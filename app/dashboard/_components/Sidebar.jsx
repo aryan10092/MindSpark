@@ -21,6 +21,10 @@ const menuItems = [{
         path: '/dashboard',
         badge: 'New'
     }, {
+          name: 'Comments',
+        icon: MessageCircleHeart,
+        path: '/dashboard/comments'
+     }, {
         name: 'Boost Mode',
      icon: Rocket,
         path: '/dashboard/boost'
@@ -28,12 +32,8 @@ const menuItems = [{
         name: 'My Profile',
         icon: UserCircle,
         path: '/dashboard/profile'
-    },
-     {
-          name: 'Comments',
-        icon: MessageCircleHeart,
-        path: '/dashboard/comments'
-     }
+    }
+     
 ]
 
 const path = usePathname()

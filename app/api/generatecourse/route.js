@@ -1,7 +1,7 @@
 import db from "@/configs/db";
-import { courseframework, generateStudyMaterial } from "@/configs/openaimodel";
+import { generateStudyMaterial } from "@/configs/openaimodel";
 import { STUDY_TABLE } from "@/configs/schema";
-import { inngest } from "@/inngest/client";
+import { generateCourseNotes } from "@/lib/generateNotes";
 import { NextResponse } from "next/server";
 
 export async function POST(req) {
@@ -29,15 +29,11 @@ export async function POST(req) {
 
     }).returning({resp:STUDY_TABLE})
  console.log(dbresult[0])
+ console.log(dbresult[0].courselayout)
 
-const result=await inngest.send({
-    name:'generate.notes',
-    data:{
-        course:dbresult[0].resp
-    }
-})
-console.log(result)
-    return NextResponse.json({result:dbresult[0]})
+    await generateCourseNotes(dbresult[0].resp)
+
+    return NextResponse.json({result:dbresult[0], notesStatus:"Ready"})
 }catch (error) {
     console.error("Error in POST request:", error);
     return NextResponse.json({ error: error.message }, { status: 500 });

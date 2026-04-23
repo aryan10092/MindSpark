@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 import { useUser } from "@clerk/nextjs";
 
@@ -10,19 +10,19 @@ function Comments() {
   const { user } = useUser();
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState("");
-      
-  const fetchComments = async () => {
+
+  const fetchComments = useCallback(async () => {
     try {
       const response = await axios.get("/api/comments");
       setComments(response.data);
     } catch (error) {
       console.error("❌ Error fetching comments:", error);
     }
-  };
+  }, []);
 
   useEffect(() => {
     fetchComments();
-  }, []);
+  }, [fetchComments]);
 
   const handleAddComment = async () => {
     if (!newComment.trim()) return;
@@ -31,12 +31,12 @@ function Comments() {
     try {
       await axios.post("/api/comments", {
         userId: user.id,
-          name: user.firstName,
+        name: user.firstName,
         cooment: newComment,
       });
 
       setNewComment("");
-      fetchComments();
+      await fetchComments();
     } catch (error) {
       console.error(" error adding comment", error);
     }

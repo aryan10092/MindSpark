@@ -147,7 +147,7 @@ function Chapters({course}) {
                <h2 className='font-medium text-slate-200 group-hover:text-orange-400 
                      transition-colors duration-300' >
                    
-                   {x?.chapter_title||x?.chapterTitle||x?.title}
+                   {x?.chapter_title||x?.chapterTitle||x?.title||x?.chapter_name}
                </h2>
                  
                <button   onClick={(e) => toggleComplete(e, i)}
@@ -168,7 +168,7 @@ function Chapters({course}) {
                             <div className='mt-4 pl-12 pr-4 text-slate-300 animate-fadeIn'>
                                 <div className='mt-4'>
                               <div 
-                             className='pt-4 prose prose-invert prose-orange max-w-none prose-p:text-slate-300 prose-headings:text-slate-200
+                             className='text-white pt-4 prose prose-invert prose-orange max-w-none prose-p:text-slate-300 prose-headings:text-slate-200
                                   prose-strong:text-orange-400 prose-em:text-pink-400 prose-code:text-slate-300 prose-code:bg-slate-700/50
                                     prose-code:rounded prose-code:px-1 prose-a:text-orange-400 hover:prose-a:text-orange-300
                               prose-blockquote:border-l-orange-500  prose-li:marker:text-orange-500'

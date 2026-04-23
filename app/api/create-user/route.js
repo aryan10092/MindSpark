@@ -1,15 +1,39 @@
- import { inngest } from "../../../inngest/client";
 import { NextResponse } from "next/server";
-// import { inngest } from "@/inngest/client";
-export async function POST(req){
+import db from "@/configs/db";
+import USER_TABLE from "@/configs/schema";
+import { eq } from "drizzle-orm";
 
-    const {user} = await req.json()
+export async function POST(req) {
+    try {
+        const { user } = await req.json();
+        const email = user?.primaryEmailAddress?.emailAddress;
 
-    const result=await inngest.send({
-        name:'user.create',
-        data:{
-            user:user
+        if (!email) {
+            return NextResponse.json({ error: "Missing user email" }, { status: 400 });
         }
-    })
-    return NextResponse.json({result:result})
+
+        const existing = await db
+            .select()
+            .from(USER_TABLE)
+            .where(eq(USER_TABLE.email, email));
+
+        let dbUser = existing[0];
+
+        if (!dbUser) {
+            const inserted = await db
+                .insert(USER_TABLE)
+                .values({
+                    name: user?.username || user?.firstName || "User",
+                    email,
+                })
+                .returning();
+
+            dbUser = inserted[0];
+        }
+
+        return NextResponse.json({ user: dbUser, created: !existing[0] });
+    } catch (error) {
+        console.error("create-user route error:", error);
+        return NextResponse.json({ error: "Failed to create user" }, { status: 500 });
+    }
 }

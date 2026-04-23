@@ -1,8 +1,5 @@
 "use client"
 
-import { eq } from 'drizzle-orm'
-import db from '../configs/db'
-import USER_TABLE from '../configs/schema'
 import { useUser } from '@clerk/nextjs'
 
 import React, { useEffect } from 'react'
@@ -13,17 +10,19 @@ function Provider({children}) {
     const {user}=useUser()
 
     useEffect(()=>{
-      user&&  newuser()
-    },[user])
+      if (user?.id && user?.primaryEmailAddress?.emailAddress) {
+        newuser()
+      }
+    },[user?.id])
 
   const newuser=async()=>{
-    
-// console.log(result)
-
-
-const resp=await axios.post('/api/create-user',{user:user})
-
-console.log(resp.data)
+    try {
+      console.log("adding user to db")
+      const resp = await axios.post('/api/create-user', { user })
+      console.log(resp.data)
+    } catch (error) {
+      console.error("create-user request failed", error)
+    }
   }
   return (
     <div>{children}</div>
